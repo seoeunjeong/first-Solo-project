@@ -102,6 +102,10 @@ public class AwsS3Service{
 //        }
 
         //        return amazonS3.getUrl(bucket, fileName).toString();
+
+        //         이미지 따로 떼기..ㅎㅎ
+//        awsS3Service.upload(profileImage,"profileImage");
+//        member.setProfileImageURL(awsS3Service.upload(profileImage,"profileImage"));
     }
 
 }

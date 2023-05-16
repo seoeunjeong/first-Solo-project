@@ -11,7 +11,6 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +21,6 @@ public class MemberService {
     private final CustomAuthorityUtils authorityUtils;
     private final PasswordEncoder passwordEncoder;
 
-    //private final AwsS3Service awsS3Service;
-    //회원가입로직//
     public Member createMember(Member member) {
 
         verifyExistsEmail(member.getEmail());
@@ -36,10 +33,6 @@ public class MemberService {
 
         member.setRoles(roles);
 
-//         이미지 따로 떼기..ㅎㅎ
-//        awsS3Service.upload(profileImage,"profileImage");
-//        member.setProfileImageURL(awsS3Service.upload(profileImage,"profileImage"));
-
         return memberRepository.save(member);
     }
 
@@ -47,10 +40,10 @@ public class MemberService {
 
         Member updateMember = findVerifiedMember(member.getMemberId());
 
-        Optional.ofNullable(member.getNickname()).ifPresent(nickname -> updateMember.setNickname(nickname));
-        Optional.ofNullable(member.getGender()).ifPresent(gender -> updateMember.setGender(gender));
-        Optional.ofNullable(member.getAge()).ifPresent(age -> updateMember.setAge(age));
-        Optional.ofNullable(member.getAddress()).ifPresent(address -> updateMember.setAddress(address));
+        Optional.ofNullable(member.getNickname()).ifPresent(updateMember::setNickname);
+        Optional.ofNullable(member.getGender()).ifPresent(updateMember::setGender);
+        Optional.ofNullable(member.getAge()).ifPresent(updateMember::setAge);
+        Optional.ofNullable(member.getAddress()).ifPresent(updateMember::setAddress);
 
         return memberRepository.save(updateMember);
     }
@@ -65,7 +58,6 @@ public class MemberService {
         return memberRepository.findAll(PageRequest.of(page, size, Sort.by("memberId").descending()));
     }
 
-
     public void adminDeleteMember(long memberId) {
         memberRepository.deleteById(memberId);
     }
@@ -77,15 +69,14 @@ public class MemberService {
 
     public void userDeleteMember(long memberId) {
         Optional<Member> optionalMember = memberRepository.findById(memberId);
-        Member findMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-        findMember.setMemberStatus(Member.MemberStatus.MEMBER_QUIT);
-        memberRepository.save(findMember);
+        Member deletedMember = optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        deletedMember.setMemberStatus(Member.MemberStatus.MEMBER_QUIT);
+        memberRepository.save(deletedMember);
     }
 
     public Member findVerifiedMember(long memberId) {
         Optional<Member> optionalMember = memberRepository.findById(memberId);
-        Member findMember= optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
-        return findMember;
+        return optionalMember.orElseThrow(() -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
     }
 
     private void verifyExistsEmail(String email) {

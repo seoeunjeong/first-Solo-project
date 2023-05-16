@@ -4,7 +4,6 @@ import com.soloproject.community.member.entity.Member;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
@@ -41,10 +40,11 @@ public class MemberDto {
 
         private Long memberId;
 
-        @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,10}$", message = "닉네임은 특수문자를 제외한 2~10자리여야 합니다.")
+        @Pattern(regexp = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[$@$!%*#?&])[A-Za-z\\d$@$!%*#?&]{8,}$",
+                message = "비밀번호는 영문,특수문자,숫자를 포함하여 8자리 이상이여야합니다.")
         private String password;
-        //테스트에서 비밀번호 수정가능한지 확인하기
 
+        @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,6}$", message = "닉네임은 특수문자를 제외한 2~6자리여야 합니다.")
         private String nickname;
 
         private int age;
@@ -52,13 +52,9 @@ public class MemberDto {
         private String gender;
 
         private String address;
-        //값타임
 
         private Member.MemberStatus memberStatus;
 
-        public void setMemberId(Long memberId) {
-            this.memberId = memberId;
-        }
     }
 
     @Getter

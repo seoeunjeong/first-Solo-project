@@ -12,7 +12,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
-
 import javax.validation.Valid;
 import javax.validation.constraints.Positive;
 import java.net.URI;
@@ -30,7 +29,7 @@ public class MemberController{
 
 
     @PostMapping("/signup")
-    public ResponseEntity SignUpMember(@Valid @RequestBody MemberDto.Post postMemberDto) {
+    public ResponseEntity<?> SignUpMember(@Valid @RequestBody MemberDto.Post postMemberDto) {
 
         Member createdMember = memberService.createMember(mapper.memberPostDtoToMember(postMemberDto));
 
@@ -44,7 +43,7 @@ public class MemberController{
 
 
     @PatchMapping("/update/{member-id}")
-    public ResponseEntity patchMember(@PathVariable("member-id") @Positive long memberId,
+    public ResponseEntity<?> patchMember(@PathVariable("member-id") @Positive long memberId,
                                       @RequestBody MemberDto.Patch requestBody) {
 
         requestBody.setMemberId(memberId);
@@ -55,7 +54,7 @@ public class MemberController{
 
 
     @GetMapping("/find/{member-id}")
-    public ResponseEntity getMember(@PathVariable("member-id") @Positive long memberId) {
+    public ResponseEntity<?> getMember(@PathVariable("member-id") @Positive long memberId) {
 
         Member findMember = memberService.findMember(memberId);
 
@@ -64,33 +63,32 @@ public class MemberController{
 
 
     @GetMapping("/find")
-    public ResponseEntity getMembers(@Positive @RequestParam int page,
+    public ResponseEntity<?> getMembers(@Positive @RequestParam int page,
                                      @Positive @RequestParam int size) {
         Page<Member> pageMembers = memberService.findMembers(page - 1, size);
         List<Member> members = pageMembers.getContent();
 
         return new ResponseEntity<>(
-                new MultiResponseDto<>(mapper.membersTomemberResponseDtos(members),
+                new MultiResponseDto<>(mapper.membersToMemberResponseDtos(members),
                         pageMembers), HttpStatus.OK);
     }
 
     //관리자삭제
     @DeleteMapping("/admin/delete/{member-id}")
-    public ResponseEntity adminDeleteMember(@PathVariable("member-id") long memberId) {
+    public ResponseEntity<?> adminDeleteMember(@PathVariable("member-id") long memberId) {
         memberService.adminDeleteMember(memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
     @DeleteMapping("/admin/delete")
-    public ResponseEntity adminDeleteMembers() {
+    public ResponseEntity<?> adminDeleteMembers() {
         memberService.adminDeleteMembers();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
 
-    //상태값변경삭제;;
     @DeleteMapping("/user/delete/{member-id}")
-    public ResponseEntity userDeleteMember(@PathVariable("member-id") long memberId) {
+    public ResponseEntity<?> userDeleteMember(@PathVariable("member-id") long memberId) {
         memberService.userDeleteMember(memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

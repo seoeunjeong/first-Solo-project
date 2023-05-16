@@ -16,7 +16,7 @@ public class Member extends Date {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long memberId;//(long타입/Long타입구분)
+    private Long memberId;
 
     @Column(nullable = false, unique = true)
     private String email;
@@ -27,7 +27,7 @@ public class Member extends Date {
     @Column(nullable = false, unique = true)
     private String nickname;
 
-    private int age;
+    private Integer age;
 
     private String gender;
 
@@ -49,11 +49,6 @@ public class Member extends Date {
     @OneToMany(mappedBy = "member")
     private List<Comment> Comments = new ArrayList<>();
 
-
-//    //프리때 엉뚱한 시간이 들어가서 시도해본 코드
-//    @CreatedDate
-//    @Column(name = "created_at", updatable = false)
-//    private ZonedDateTime created_At = ZonedDateTime.now(ZoneId.of("Asia/Seoul"));
 
     public enum MemberStatus {
         MEMBER_JOIN("회원가입"),
