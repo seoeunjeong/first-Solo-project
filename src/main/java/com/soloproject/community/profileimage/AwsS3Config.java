@@ -1,4 +1,4 @@
-package com.soloproject.community.profile;
+package com.soloproject.community.profileimage;
 
 import com.amazonaws.auth.AWSStaticCredentialsProvider;
 import com.amazonaws.auth.BasicAWSCredentials;

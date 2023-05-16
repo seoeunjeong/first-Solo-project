@@ -3,6 +3,7 @@ package com.soloproject.community.member.entity;
 import com.soloproject.community.audit.Auditable;
 import com.soloproject.community.article.entity.Article;
 import com.soloproject.community.comment.entity.Comment;
+import com.soloproject.community.profileimage.ProfileImage;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
@@ -34,6 +35,9 @@ public class Member extends Auditable {
     private String address;
 
     private String profileImageURL;
+
+    @OneToMany(mappedBy ="member")
+    private List<ProfileImage> profileImages=new ArrayList<>();
 
     @Enumerated(value = EnumType.STRING)
     @Column(length = 20, nullable = false)

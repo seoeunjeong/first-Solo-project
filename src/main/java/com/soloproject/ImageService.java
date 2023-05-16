@@ -1,4 +1,4 @@
-package com.soloproject.community.profile;
+package com.soloproject;
 
 import org.springframework.web.multipart.MultipartFile;
 
