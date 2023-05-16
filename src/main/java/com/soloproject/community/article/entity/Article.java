@@ -1,6 +1,6 @@
 package com.soloproject.community.article.entity;
 
-import com.soloproject.community.Date;
+import com.soloproject.community.audit.Auditable;
 import com.soloproject.community.category.ArticleCategory;
 import com.soloproject.community.member.entity.Member;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Article extends Date {
+public class Article extends Auditable {
 
     @Id @GeneratedValue(strategy =GenerationType.IDENTITY)
     private Long articleId;

@@ -1,6 +1,6 @@
 package com.soloproject.community.member.entity;
 
-import com.soloproject.community.Date;
+import com.soloproject.community.audit.Auditable;
 import com.soloproject.community.article.entity.Article;
 import com.soloproject.community.comment.entity.Comment;
 import lombok.Getter;
@@ -12,7 +12,7 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-public class Member extends Date {
+public class Member extends Auditable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

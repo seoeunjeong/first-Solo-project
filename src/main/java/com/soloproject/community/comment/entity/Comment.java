@@ -1,6 +1,6 @@
 package com.soloproject.community.comment.entity;
 
-import com.soloproject.community.Date;
+import com.soloproject.community.audit.Auditable;
 import com.soloproject.community.article.entity.Article;
 import com.soloproject.community.member.entity.Member;
 import lombok.Getter;
@@ -13,7 +13,7 @@ import javax.persistence.*;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Comment extends Date {
+public class Comment extends Auditable {
 
      @Id
      @GeneratedValue(strategy = GenerationType.IDENTITY)
