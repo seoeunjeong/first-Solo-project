@@ -22,11 +22,9 @@ import java.util.List;
 @Validated
 @RequiredArgsConstructor
 public class MemberController{
-
     private final static String MEMBER_DEFAULT_URL = "/members";
     private final MemberService memberService;
     private final MemberMapper mapper;
-
 
     @PostMapping("/signup")
     public ResponseEntity<?> SignUpMember(@Valid @RequestBody MemberDto.Post postMemberDto) {
@@ -34,17 +32,16 @@ public class MemberController{
         Member createdMember = memberService.createMember(mapper.memberPostDtoToMember(postMemberDto));
 
         URI location = UriComponentsBuilder.newInstance()
-                .path(MEMBER_DEFAULT_URL + "/{createdMember.getMemberId()}")
+                .path(MEMBER_DEFAULT_URL + "/find/{createdMember.getMemberId()}")
                 .buildAndExpand(createdMember.getMemberId())
                 .toUri();
 
         return ResponseEntity.created(location).build();
     }
 
-
     @PatchMapping("/update/{member-id}")
     public ResponseEntity<?> patchMember(@PathVariable("member-id") @Positive long memberId,
-                                      @RequestBody MemberDto.Patch requestBody) {
+                                         @Valid @RequestBody MemberDto.Patch requestBody) {
 
         requestBody.setMemberId(memberId);
         Member updatedMember = memberService.updateMember(mapper.memberPatchDtoToMember(requestBody));
@@ -92,4 +89,6 @@ public class MemberController{
         memberService.userDeleteMember(memberId);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
+
+
 }

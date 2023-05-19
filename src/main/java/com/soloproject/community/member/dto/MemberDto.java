@@ -1,7 +1,7 @@
 package com.soloproject.community.member.dto;
 
 import com.soloproject.community.member.entity.Member;
-import lombok.Builder;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,6 +15,7 @@ public class MemberDto {
     @Getter
     @Setter
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class Post {
 
         @Email(message = "이메일의 형식이 올바르지 않습니다.")
@@ -32,15 +33,11 @@ public class MemberDto {
         @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,10}$", message = "닉네임은 특수문자를 제외한 2~10자리여야 합니다.")
         private String nickname;
 
-        public Post(String email, String password, String nickname) {
-            this.email = email;
-            this.password = password;
-            this.nickname = nickname;
-        }
     }
     @Getter
     @Setter
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class Patch{
 
         private Long memberId;
@@ -65,6 +62,7 @@ public class MemberDto {
     @Getter
     @Setter
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class Response{
 
         private Long memberId;

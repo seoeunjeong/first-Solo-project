@@ -1,5 +1,7 @@
-package com.soloproject.community.security;
+package com.soloproject.community.security.filter;
 
+import com.soloproject.community.security.utiil.CustomAuthorityUtils;
+import com.soloproject.community.security.utiil.JwtTokenizer;
 import io.jsonwebtoken.ExpiredJwtException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;

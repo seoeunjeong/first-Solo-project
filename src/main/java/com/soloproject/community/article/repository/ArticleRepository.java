@@ -9,6 +9,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface ArticleRepository extends JpaRepository<Article,Long> {
 
-    @Query(value = "SELECT DISTINCT a FROM Article a WHERE a.title LIKE %:keyword% OR a.content LIKE %:keyword%")
-    Page<Article> search(@Param("keyword")String keyword, Pageable pageable);
+//    @Query(value = "SELECT DISTINCT a FROM Article a WHERE a.title LIKE %:keyword% OR a.content LIKE %:keyword%")
+//    Page<Article> search(@Param("keyword")String keyword, Pageable pageable);
 }

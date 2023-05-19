@@ -1,10 +1,11 @@
-package com.soloproject.community.security;
+package com.soloproject.community.security.filter;
 
 import com.soloproject.community.Exception.BusinessLogicException;
 import com.soloproject.community.Exception.ExceptionCode;
 import com.soloproject.community.member.entity.Member;
 
 import com.soloproject.community.member.repository.MemberRepository;
+import com.soloproject.community.security.utiil.CustomAuthorityUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

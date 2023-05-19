@@ -4,7 +4,7 @@ import com.soloproject.community.Exception.BusinessLogicException;
 import com.soloproject.community.Exception.ExceptionCode;
 import com.soloproject.community.member.entity.Member;
 import com.soloproject.community.member.repository.MemberRepository;
-import com.soloproject.community.security.CustomAuthorityUtils;
+import com.soloproject.community.security.utiil.CustomAuthorityUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -41,6 +41,7 @@ public class MemberService {
         Member updateMember = findVerifiedMember(member.getMemberId());
 
         Optional.ofNullable(member.getNickname()).ifPresent(updateMember::setNickname);
+        Optional.ofNullable(member.getPassword()).ifPresent(password->updateMember.setPassword(passwordEncoder.encode(password)));
         Optional.ofNullable(member.getGender()).ifPresent(updateMember::setGender);
         Optional.ofNullable(member.getAge()).ifPresent(updateMember::setAge);
         Optional.ofNullable(member.getAddress()).ifPresent(updateMember::setAddress);

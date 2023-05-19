@@ -1,4 +1,4 @@
-package com.soloproject.community.security;
+package com.soloproject.community.security.filter;
 
 import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.BadCredentialsException;

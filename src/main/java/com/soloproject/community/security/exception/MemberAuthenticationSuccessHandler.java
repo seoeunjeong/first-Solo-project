@@ -1,4 +1,4 @@
-package com.soloproject.community.security;
+package com.soloproject.community.security.exception;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;

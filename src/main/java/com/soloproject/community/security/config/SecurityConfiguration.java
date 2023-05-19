@@ -1,5 +1,14 @@
-package com.soloproject.community.security;
+package com.soloproject.community.security.config;
 
+import com.soloproject.community.security.utiil.CustomAuthorityUtils;
+import com.soloproject.community.security.utiil.JwtTokenizer;
+import com.soloproject.community.security.exception.MemberAccessDeniedHandler;
+import com.soloproject.community.security.exception.MemberAuthenticationEntryPoint;
+import com.soloproject.community.security.exception.MemberAuthenticationFailureHandler;
+import com.soloproject.community.security.exception.MemberAuthenticationSuccessHandler;
+import com.soloproject.community.security.filter.JwtAuthenticationFilter;
+import com.soloproject.community.security.filter.JwtVerificationFilter;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,7 +28,9 @@ import java.util.Arrays;
 
 @Configuration
 public class SecurityConfiguration {
+    @Autowired
     private final JwtTokenizer jwtTokenizer;
+    @Autowired
     private final CustomAuthorityUtils authorityUtils;
 
     public SecurityConfiguration(JwtTokenizer jwtTokenizer, CustomAuthorityUtils authorityUtils) {
@@ -47,7 +58,6 @@ public class SecurityConfiguration {
                 .and()
                 .authorizeHttpRequests(authorize -> authorize
                         .anyRequest().permitAll()
-
                 );
         return http.build();
     }

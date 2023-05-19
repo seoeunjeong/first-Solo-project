@@ -1,4 +1,4 @@
-package com.soloproject.community.security;
+package com.soloproject.community.security.dto;
 
 import lombok.Getter;
 

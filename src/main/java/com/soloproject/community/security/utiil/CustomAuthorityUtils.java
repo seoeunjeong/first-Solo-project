@@ -1,4 +1,4 @@
-package com.soloproject.community.security;
+package com.soloproject.community.security.utiil;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.GrantedAuthority;

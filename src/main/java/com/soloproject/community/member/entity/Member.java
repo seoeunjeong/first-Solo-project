@@ -7,6 +7,7 @@ import com.soloproject.community.profileimage.ProfileImage;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ public class Member extends Auditable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false, unique = true, updatable = false)
     private String email;
 
     @Column(length = 100, nullable = false)
@@ -52,6 +53,7 @@ public class Member extends Auditable {
 
     @OneToMany(mappedBy = "member")
     private List<Comment> Comments = new ArrayList<>();
+
 
 
     public enum MemberStatus {

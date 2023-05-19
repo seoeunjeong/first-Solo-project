@@ -1,4 +1,4 @@
-package com.soloproject.community.security;
+package com.soloproject.community.security.exception;
 
 import com.google.gson.Gson;
 import com.soloproject.community.response.ErrorResponse;

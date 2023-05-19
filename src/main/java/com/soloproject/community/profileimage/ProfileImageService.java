@@ -3,7 +3,6 @@ package com.soloproject.community.profileimage;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
-import com.soloproject.community.Exception.ImageException;
 import com.soloproject.community.member.entity.Member;
 import com.soloproject.community.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
@@ -28,7 +27,9 @@ public class ProfileImageService {
     private final MemberService memberService;
 
     public String upload(MultipartFile profileImage, long memberId, String dirName) throws IOException {
-
+        validateFileExists(profileImage);
+//        파일 이름 다듬기
+//        파일 사이즈 최적화
         File uploadFile = convert(profileImage)
                 .orElseThrow(() -> new IllegalArgumentException("MultipartFile -> File로 전환이 실패했습니다."));
 
@@ -36,15 +37,16 @@ public class ProfileImageService {
     }
 
     private String s3upload(File uploadFile, String dirName, long memberId) {
+
         String fileName = dirName + "/" + uploadFile.getName();
         String uploadImageUrl = putS3(uploadFile, fileName);
 
         removeNewFile(uploadFile);  // 로컬에 생성된 File 삭제 (MultipartFile -> File 전환 하며 로컬에 파일 생성됨)
 
         Member findMember = memberService.findMember(memberId);
+        findMember.setProfileImageURL(uploadImageUrl);
         ProfileImage image = new ProfileImage();
         image.setFileUrl(uploadImageUrl);
-        findMember.setProfileImageURL(uploadImageUrl);
         image.setMember(findMember);
         imageRepository.save(image);
 

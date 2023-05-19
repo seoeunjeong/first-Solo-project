@@ -1,7 +1,9 @@
-package com.soloproject.community.security;
+package com.soloproject.community.security.filter;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.soloproject.community.member.entity.Member;
+import com.soloproject.community.security.utiil.JwtTokenizer;
+import com.soloproject.community.security.dto.LoginDto;
 import lombok.SneakyThrows;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

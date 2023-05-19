@@ -1,4 +1,4 @@
-package com.soloproject.community.security;
+package com.soloproject.community.security.utiil;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
