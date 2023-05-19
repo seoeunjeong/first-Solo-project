@@ -56,4 +56,9 @@ jwt:
             scope:
               - email
               - profile
-
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: error
