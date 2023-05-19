@@ -4,6 +4,7 @@ import com.soloproject.community.audit.Auditable;
 import com.soloproject.community.article.entity.Article;
 import com.soloproject.community.comment.entity.Comment;
 import com.soloproject.community.profileimage.ProfileImage;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import javax.persistence.*;

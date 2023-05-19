@@ -27,7 +27,7 @@ public class ProfileImageService {
     private final MemberService memberService;
 
     public String upload(MultipartFile profileImage, long memberId, String dirName) throws IOException {
-        validateFileExists(profileImage);
+//        validateFileExists(profileImage);
 //        파일 이름 다듬기
 //        파일 사이즈 최적화
         File uploadFile = convert(profileImage)
@@ -83,11 +83,11 @@ public class ProfileImageService {
         }
     }
 
-    private void validateFileExists(MultipartFile multipartFile) {
+   /* private void validateFileExists(MultipartFile multipartFile) {
         if (multipartFile.isEmpty()) {
             throw new ImageException("이미지 파일이 없습니다.");
         }
-    }
+    }*/
 }
 
 

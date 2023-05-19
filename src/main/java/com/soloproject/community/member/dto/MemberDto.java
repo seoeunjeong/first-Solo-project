@@ -5,9 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
+
+import javax.validation.constraints.*;
 import java.time.LocalDateTime;
 
 
@@ -49,6 +48,8 @@ public class MemberDto {
         @Pattern(regexp = "^[ㄱ-ㅎ가-힣a-z0-9-_]{2,6}$", message = "닉네임은 특수문자를 제외한 2~6자리여야 합니다.")
         private String nickname;
 
+        @Min(12)
+        @Max(100)
         private int age;
 
         private String gender;
