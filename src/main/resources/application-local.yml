@@ -28,10 +28,10 @@ spring:
 cloud:
   aws:
     s3:
-      bucket:
+      bucket: eunjeongsoloproject
     credentials:
-      access-key:
-      secret-key:
+      access-key: ${AWS_ACCESS_KEY}
+      secret-key: ${SECRET_ACCESS_KEY}
     region:
       static: ap-northeast-2
       auto: false
@@ -56,3 +56,4 @@ jwt:
             scope:
               - email
               - profile
+
