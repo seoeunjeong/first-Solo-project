@@ -32,14 +32,9 @@ jobs:
     - name: Add permission
       run: chmod +x gradlew   
     - name: Build with Gradle
-      run: |
-        echo "MYSQL_SECRET=$MYSQL_SECRET" >> .env
-        echo "JWT_SECRET_KEY=$JWT_SECRET_KEY" >> .env
-        chmod +x gradlew
-        ./gradlew build --console=plain
-      env:
-        MYSQL_SECRET: ${{secrets.MYSQL_SECRET}}
-        JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
+      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
+      with:
+        arguments: build
 
     - name: Make zip file
       run: zip -r ./soloproject.zip .
