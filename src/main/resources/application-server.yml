@@ -43,3 +43,6 @@ logging:
       amazonaws:
         util:
           EC2MetadataUtils: error
+  batch:
+    jdbc:
+      isolation-level-for-create: default

@@ -15,6 +15,9 @@ public class ProfileImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    //uuid?
+
+    private String fileName;
 
     @NonNull
     private String fileUrl;

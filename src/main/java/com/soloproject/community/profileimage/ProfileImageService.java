@@ -47,6 +47,7 @@ public class ProfileImageService {
         findMember.setProfileImageURL(uploadImageUrl);
         ProfileImage image = new ProfileImage();
         image.setFileUrl(uploadImageUrl);
+        image.setFileName(fileName);
         image.setMember(findMember);
         imageRepository.save(image);
 
@@ -88,6 +89,10 @@ public class ProfileImageService {
             throw new ImageException("이미지 파일이 없습니다.");
         }
     }*/
+
+    public Optional<ProfileImage> findImage(long memberId){
+        return imageRepository.findById(memberId);
+    }
 }
 
 
