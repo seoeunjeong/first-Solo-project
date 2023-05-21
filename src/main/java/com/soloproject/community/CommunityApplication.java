@@ -13,4 +13,6 @@ public class CommunityApplication {
 		SpringApplication.run(CommunityApplication.class, args);
 	}
 
+	//열심히하자
+
 }
