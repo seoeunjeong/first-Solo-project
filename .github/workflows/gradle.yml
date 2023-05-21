@@ -33,12 +33,13 @@ jobs:
       run: chmod +x gradlew   
     - name: Build with Gradle
       run: |
-        echo "MYSQL_SECRET=${{ secrets.MYSQL_SECRET }}" >> ${{ github.workspace }}/env-file
-        echo "JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}" >> ${{ github.workspace }}/env-file
+        echo "MYSQL_SECRET=$MYSQL_SECRET" >> .env
+        echo "JWT_SECRET_KEY=$JWT_SECRET_KEY" >> .env
         chmod +x gradlew
         ./gradlew build --console=plain
       env:
-        ENV_FILE_PATH: ${{ github.workspace }}/env-file
+        MYSQL_SECRET: ${{secrets.MYSQL_SECRET}}
+        JWT_SECRET_KEY: ${{secrets.JWT_SECRET_KEY}}
 
     - name: Make zip file
       run: zip -r ./soloproject.zip .
