@@ -32,19 +32,18 @@ jobs:
     - name: Add permission
       run: chmod +x gradlew   
     - name: Build with Gradle
-      uses: gradle/gradle-build-action@67421db6bd0bf253fb4bd25b31ebb98943c375e1
-      with:
-        arguments: build
-        
+      run: |
+        echo "API_KEY=${{ secrets.MYSQL_SECRET }}" >> ${{ github.workspace }}/env-file
+        echo "DATABASE_URL=${{ secrets.JWT_SECRET_KEY }}" >> ${{ github.workspace }}/env-file
+        chmod +x gradlew
+        ./gradlew build --console=plain
+      env:
+        ENV_FILE_PATH: ${{ github.workspace }}/env-file
 
     - name: Make zip file
       run: zip -r ./soloproject.zip .
       shell: bash
       
-    - name: Create environment file
-      run: |
-       echo "API_KEY=${{ secrets.MYSQL_SECRET }}" >> ${{ github.workspace }}/env-file
-       echo "DATABASE_URL=${{ secrets.JWT_SECRET_KEY }}" >> ${{ github.workspace }}/env-file
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
