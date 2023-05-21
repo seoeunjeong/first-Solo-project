@@ -16,8 +16,6 @@ permissions:
   
 env:
   S3_BUCKET_NAME: eunjeongsoloproject
-  API_KEY: ${{ secrets.MYSQL_SECRET }}
-  DATABASE_URL: ${{ secrets.JWT_SECRET_KEY }}
   
 jobs:
   build:
@@ -42,8 +40,11 @@ jobs:
     - name: Make zip file
       run: zip -r ./soloproject.zip .
       shell: bash
-    
-
+      
+    - name: Create environment file
+      run: |
+       echo "API_KEY=${{ secrets.MYSQL_SECRET }}" >> ${{ github.workspace }}/env-file
+       echo "DATABASE_URL=${{ secrets.JWT_SECRET_KEY }}" >> ${{ github.workspace }}/env-file
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
