@@ -33,8 +33,8 @@ jobs:
       run: chmod +x gradlew   
     - name: Build with Gradle
       run: |
-        echo "API_KEY=${{ secrets.MYSQL_SECRET }}" >> ${{ github.workspace }}/env-file
-        echo "DATABASE_URL=${{ secrets.JWT_SECRET_KEY }}" >> ${{ github.workspace }}/env-file
+        echo "MYSQL_SECRET=${{ secrets.MYSQL_SECRET }}" >> ${{ github.workspace }}/env-file
+        echo "JWT_SECRET_KEY=${{ secrets.JWT_SECRET_KEY }}" >> ${{ github.workspace }}/env-file
         chmod +x gradlew
         ./gradlew build --console=plain
       env:
