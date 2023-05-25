@@ -50,7 +50,7 @@ import static org.springframework.restdocs.snippet.Attributes.key;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 
-@SpringBootTest(properties = "spring.profiles.active=local")
+@SpringBootTest(properties = "spring.profiles.active=server")
 @AutoConfigureMockMvc
 @AutoConfigureRestDocs
 public class ControllerRestdocTest {
